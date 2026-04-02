@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sakashita | Ofertas do Dia</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-blue"></div>
+    <div class="ambient ambient-yellow"></div>
+
+    <div class="page-shell">
+      <section class="intro-panel">
+        <div class="brand-lockup">
+          <div class="brand-mark">
+            <div class="brand-bag">
+              <span></span>
+            </div>
+            <div>
+              <p class="eyebrow">MVP para mercado local</p>
+              <h1>Sakashita</h1>
+            </div>
+          </div>
+
+          <h2>Catalogo proprio para divulgar as ofertas do dia.</h2>
+          <p>
+            O mercado cadastra as promocoes em um painel simples e o cliente enxerga tudo em uma
+            interface com cara de app, sem depender somente do WhatsApp.
+          </p>
+        </div>
+
+        <div class="intro-metrics">
+          <article class="metric-card">
+            <strong id="metric-offers">0</strong>
+            <span>ofertas ativas</span>
+          </article>
+          <article class="metric-card">
+            <strong id="metric-stores">0</strong>
+            <span>lojas cadastradas</span>
+          </article>
+          <article class="metric-card">
+            <strong>1</strong>
+            <span>painel de cadastro</span>
+          </article>
+        </div>
+
+        <div class="intro-tags">
+          <span>Busca</span>
+          <span>Filtro</span>
+          <span>Entrega ou retirada</span>
+          <span>Cadastro de ofertas</span>
+        </div>
+      </section>
+
+      <main class="app-shell">
+        <header class="app-header">
+          <div>
+            <p class="eyebrow">Ofertas Sakashita</p>
+            <h3>Sakashita</h3>
+            <p id="store-summary">Carregando loja...</p>
+          </div>
+
+          <button class="ghost-button" id="open-stores" type="button">Trocar loja</button>
+        </header>
+
+        <section class="hero-card">
+          <span class="mode-pill" id="mode-summary">Entrega ativa</span>
+          <h4>Ofertas claras, filtros simples e cadastro rapido.</h4>
+          <p>
+            O cliente encontra os precos do dia e o mercado atualiza tudo pelo painel em poucos
+            toques.
+          </p>
+
+          <div class="hero-actions">
+            <button class="primary-button" id="open-filters" type="button">Filtros</button>
+            <button class="secondary-button" id="open-admin" type="button">Painel</button>
+          </div>
+        </section>
+
+        <nav class="feed-tabs" aria-label="Tipos de feed">
+          <button class="feed-tab is-active" data-feed="daily" type="button">Ofertas do Dia</button>
+          <button class="feed-tab" data-feed="club" type="button">Clube Sakashita</button>
+        </nav>
+
+        <section class="screen is-active" id="screen-offers">
+          <div class="toolbar">
+            <label class="search-box">
+              <span>Buscar produto</span>
+              <input
+                id="search-input"
+                type="search"
+                placeholder="Ex.: arroz, tomate, refrigerante..."
+                autocomplete="off"
+              />
+            </label>
+
+            <div class="mode-switch" aria-label="Modo de compra">
+              <button class="mode-button is-active" data-mode="delivery" type="button">Entrega</button>
+              <button class="mode-button" data-mode="pickup" type="button">Retirada</button>
+            </div>
+          </div>
+
+          <div class="chip-row" id="category-row"></div>
+
+          <div class="result-row">
+            <p id="results-label">Carregando ofertas...</p>
+            <button class="text-button" id="clear-filters" type="button">Limpar</button>
+          </div>
+
+          <div class="offers-grid" id="offers-grid"></div>
+
+          <div class="empty-card hidden" id="empty-card">
+            <div class="empty-visual"></div>
+            <h4>Nenhuma oferta encontrada.</h4>
+            <p>Limpe os filtros ou cadastre novos itens no painel do mercado.</p>
+          </div>
+        </section>
+
+        <section class="screen" id="screen-stores">
+          <div class="screen-head">
+            <div>
+              <p class="eyebrow">Selecionar unidade</p>
+              <h4>Escolha a loja e o modo de atendimento</h4>
+            </div>
+          </div>
+
+          <div class="store-mode-card">
+            <div class="mode-switch wide">
+              <button class="mode-button is-active" data-store-mode="delivery" type="button">Entrega</button>
+              <button class="mode-button" data-store-mode="pickup" type="button">Retirada</button>
+            </div>
+            <p id="store-copy">A lista abaixo mostra as unidades mais proximas do cliente.</p>
+          </div>
+
+          <div class="store-list" id="store-list"></div>
+        </section>
+
+        <section class="screen" id="screen-admin">
+          <div class="screen-head">
+            <div>
+              <p class="eyebrow">Painel do mercado</p>
+              <h4>Cadastre as ofertas do dia</h4>
+            </div>
+            <span class="status-chip" id="form-status">Nova oferta</span>
+          </div>
+
+          <form class="admin-form" id="offer-form">
+            <input id="offer-id" type="hidden" />
+
+            <label>
+              Produto
+              <input id="offer-title" type="text" required placeholder="Ex.: Arroz Tipo 1 5kg" />
+            </label>
+
+            <label>
+              Descricao
+              <textarea id="offer-description" rows="3" required placeholder="Resumo rapido da promocao"></textarea>
+            </label>
+
+            <div class="form-grid">
+              <label>
+                Categoria
+                <select id="offer-category"></select>
+              </label>
+
+              <label>
+                Loja
+                <select id="offer-store"></select>
+              </label>
+            </div>
+
+            <div class="form-grid three">
+              <label>
+                Preco atual
+                <input id="offer-price" type="number" min="0" step="0.01" required />
+              </label>
+
+              <label>
+                Preco anterior
+                <input id="offer-old-price" type="number" min="0" step="0.01" required />
+              </label>
+
+              <label>
+                Unidade
+                <input id="offer-unit" type="text" required placeholder="un, kg, pct..." />
+              </label>
+            </div>
+
+            <div class="form-grid three">
+              <label>
+                Validade
+                <input id="offer-validity" type="date" required />
+              </label>
+
+              <label>
+                Selo
+                <input id="offer-badge" type="text" placeholder="Oferta do Dia" />
+              </label>
+
+              <label>
+                Cor do card
+                <select id="offer-color">
+                  <option value="amber">Amarelo</option>
+                  <option value="blue">Azul</option>
+                  <option value="red">Vermelho</option>
+                  <option value="mint">Verde suave</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="check-grid">
+              <label class="check-card">
+                <input id="offer-delivery" type="checkbox" checked />
+                <span>Entrega</span>
+              </label>
+              <label class="check-card">
+                <input id="offer-pickup" type="checkbox" checked />
+                <span>Retirada</span>
+              </label>
+              <label class="check-card">
+                <input id="offer-featured" type="checkbox" checked />
+                <span>Destaque</span>
+              </label>
+              <label class="check-card">
+                <input id="offer-club" type="checkbox" />
+                <span>Clube</span>
+              </label>
+              <label class="check-card">
+                <input id="offer-active" type="checkbox" checked />
+                <span>Ativa</span>
+              </label>
+            </div>
+
+            <div class="hero-actions">
+              <button class="primary-button" type="submit">Salvar oferta</button>
+              <button class="secondary-button" id="reset-form" type="button">Nova oferta</button>
+            </div>
+          </form>
+
+          <div class="result-row">
+            <p id="admin-summary">0 itens cadastrados</p>
+          </div>
+
+          <div class="admin-list" id="admin-list"></div>
+        </section>
+
+        <nav class="bottom-nav">
+          <button class="nav-item is-active" data-screen="offers" type="button">Ofertas</button>
+          <button class="nav-item" data-screen="stores" type="button">Lojas</button>
+          <button class="nav-item" data-screen="admin" type="button">Painel</button>
+        </nav>
+      </main>
+    </div>
+
+    <div class="sheet-backdrop hidden" id="sheet-backdrop"></div>
+
+    <aside class="sheet hidden" id="filter-sheet">
+      <div class="sheet-handle"></div>
+      <div class="screen-head">
+        <div>
+          <p class="eyebrow">Filtros</p>
+          <h4>Refine as ofertas</h4>
+        </div>
+        <button class="ghost-button" id="close-filters" type="button">Fechar</button>
+      </div>
+
+      <label>
+        Ordenar por
+        <select id="filter-sort"></select>
+      </label>
+
+      <label>
+        Categoria
+        <select id="filter-category"></select>
+      </label>
+
+      <label class="check-card single">
+        <input id="filter-featured" type="checkbox" />
+        <span>Mostrar somente destaques</span>
+      </label>
+
+      <div class="hero-actions">
+        <button class="secondary-button" id="reset-sheet" type="button">Limpar</button>
+        <button class="primary-button" id="apply-sheet" type="button">Aplicar</button>
+      </div>
+    </aside>
+
+    <div class="toast hidden" id="toast"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
