@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "name": "Sakashita Ofertas",
+    "slug": "sakashita-ofertas",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "platforms": [
+      "android"
+    ],
+    "android": {
+      "package": "com.willsierro.sakashitaofertas",
+      "edgeToEdgeEnabled": true
+    }
+  }
+}
